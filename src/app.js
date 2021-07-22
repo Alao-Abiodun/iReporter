@@ -19,4 +19,6 @@ app.use('/api/v1', userRoute);
 
 app.listen(PORT, () => {
     console.log(`The app is running at ${PORT}`)
-})
+});
+
+module.exports = app;
