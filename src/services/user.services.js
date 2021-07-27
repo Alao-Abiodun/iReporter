@@ -27,6 +27,11 @@ const userServices = {
         user.id = newId;
         userData.push(user);
         return user;
+    },
+
+    login (email) {
+        const foundUser = userData.find(user => user.email === email);
+        return foundUser || {};
     }
 }
 

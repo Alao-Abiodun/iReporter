@@ -1,4 +1,4 @@
-const errorHandler = (req, res, err) => {
+const errorHandler = (err, req, res) => {
     // user customized error code
     if (err.statusCode) {
         res.status(statusCode).json({
@@ -19,7 +19,8 @@ const errorHandler = (req, res, err) => {
             status: 'error',
             error: 'Internal Server Error',
             data: []
-        })
+        });
+        console.log(err.message);
     }
 }
 

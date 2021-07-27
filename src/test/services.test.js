@@ -15,7 +15,6 @@ describe('User', () => {
             // let lastUserId = userLength[userLength - 1].id;
             // newId = lastUserId + 1;
             let newUser = {
-                id: 1,
                 firstname: 'fawaz',
                 lastname: 'illyas',
                 othername: 'ayinla',
@@ -40,6 +39,23 @@ describe('User', () => {
                     res.body.data.email.should.be.equal('fawaz@gmail.com')
                 })
                 done();
+        })
+
+        describe('Existing Users can login successfully', () => {
+            it ('user should be able to login successfully if its existed', done => {
+                let userEmail = {email: 'fawaz@gmail.com'}
+                chai.request(app)
+                    .post('/api/v1/user/login')
+                    .send(userEmail)
+                    .end((err, res) => {
+                        if (err) {
+                            console.log(err);
+                        }
+                        res.body.should.be.a('object');
+                        res.body.data.should.be.a('object');                        
+                    })
+                    done();
+            })
         })
     })
 })
