@@ -9,6 +9,7 @@ const {PORT} = process.env;
 
 app.use(morgan('dev'));
 app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 
 const userRoute = require('./routes/user.route');
 
