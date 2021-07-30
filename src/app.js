@@ -1,12 +1,15 @@
 const express = require('express');
 const dotenv = require('dotenv');
+const morgan = require('morgan');
 dotenv.config()
 
 const app = express();
 
 const {PORT} = process.env;
 
+app.use(morgan('dev'));
 app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 
 const userRoute = require('./routes/user.route');
 

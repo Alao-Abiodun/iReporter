@@ -1,5 +1,10 @@
 const userData = require('../utils/dummyData');
 const User = require('../models/user.model');
+const customError = require('../utils/customError');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
+
+const {ACCESS_TOKEN_SECRET, REFREHS_TOKEN_SECRET} = process.env;
 
 
 const userServices = {
@@ -26,7 +31,17 @@ const userServices = {
         const newId = lastId + 1;
         user.id = newId;
         userData.push(user);
-        return user;
+        const accessToken = jwt.sign(user.email, ACCESS_TOKEN_SECRET);
+        return {user, accessToken};
+    },
+
+    login (email) {
+        const foundUser = userData.find(user => user.email === email);
+        if (!foundUser) {
+            return new customError(401, 'user not found!');
+        }
+        const accessToken = jwt.sign(foundUser.email, ACCESS_TOKEN_SECRET);
+        return {foundUser, accessToken} || {};
     }
 }
 
