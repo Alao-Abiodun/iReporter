@@ -12,6 +12,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 const userRoute = require('./routes/user.route');
+const incidentRoute = require('./routes/incident.route');
 
 // MAIN ENTRY POINT
 app.get('/', (req, res) => {
@@ -19,6 +20,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/api/v1', userRoute);
+app.use('/api/v1', incidentRoute);
 
 app.listen(PORT, () => {
     console.log(`The app is running at ${PORT}`)

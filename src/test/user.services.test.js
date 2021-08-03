@@ -1,8 +1,12 @@
 const app = require('../app');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
-const users = require('../utils/dummyData');
+const {ACCESS_TOKEN_SECRET, REFREHS_TOKEN_SECRET} = process.env;
+
+const {users} = require('../utils/dummyData');
 
 let should = chai.should();
 
@@ -11,9 +15,9 @@ chai.use(chaiHttp);
 describe('User', () => {
     describe('create a new User', () => {
         it('should add user into the Arrays of object', done => {
-            // let userLength = users.length;
-            // let lastUserId = userLength[userLength - 1].id;
-            // newId = lastUserId + 1;
+            let userLength = users.length;
+            let lastUserId = users[userLength - 1].id;
+            newId = lastUserId + 1;
             let newUser = {
                 firstname: 'fawaz',
                 lastname: 'illyas',
@@ -43,16 +47,16 @@ describe('User', () => {
 
         describe('Existing Users can login successfully', () => {
             it ('user should be able to login successfully if its existed', done => {
-                let userEmail = {email: 'fawaz@gmail.com'}
+                let user = {email: 'fawaz@gmail.com'}
+                const accessToken = jwt.sign(user.email, ACCESS_TOKEN_SECRET);
                 chai.request(app)
                     .post('/api/v1/user/login')
-                    .send(userEmail)
+                    .send(user)
                     .end((err, res) => {
                         if (err) {
                             console.log(err);
                         }
-                        res.body.should.be.a('object');
-                        res.body.data.should.be.a('object');                        
+                        res.should.have.status(200);                        
                     })
                     done();
             })
