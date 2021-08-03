@@ -20,6 +20,18 @@ const incidentServices = {
         return foundFlag || {};
     },
 
+    // @describe create a red-flag
+    // @public api/v1/red-flag
+
+    addRegFlag (incident) {
+        const incidentLenght = incidents.length;
+        const lastIncidentId = incidents[incidentLenght - 1].id;
+        const newIncidentId = lastIncidentId + 1;
+        incident.id = newIncidentId;
+        incidents.push(incident);
+        return incident;
+    }
+
 }
 
 module.exports = incidentServices;
