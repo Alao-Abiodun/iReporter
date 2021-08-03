@@ -34,4 +34,41 @@ const users = [
     }
 ];
 
-module.exports = users;
+
+const incidents = [
+    {
+        id: 1,
+        createdOn: '2019-12-25',
+        createdBy: '',
+        type: ['red-flag'],
+        location: ['2.35', '1.90'],
+        status: ['rejected'],
+        images: 'abiodun.jpg',
+        vidoes: 'marry.mp4',
+        comment: 'This is really serious, please look into the situation.'
+    },
+    {
+        id: 2,
+        createdOn: '2020-12-25',
+        createdBy: '',
+        type: ['intervention'],
+        location: ['2.35', '1.90'],
+        status: ['resolved'],
+        images: 'road.jpg',
+        vidoes: 'mining.mp4',
+        comment: 'This road is bad and cause accident when travelling at night.'
+    },
+    {
+        id: 3,
+        createdOn: '2021-07-30',
+        createdBy: '',
+        type: ['intervention'],
+        location: ['2.35', '1.90'],
+        status: ['resolved'],
+        images: ['killing.jpg'],
+        vidoes: ['deathkillings.mp4'],
+        comment: 'This totally outrageous and such act should be taken away and penalized.'
+    }
+]
+
+module.exports = {users, incidents};

@@ -1,4 +1,4 @@
-const userData = require('../utils/dummyData');
+const {users} = require('../utils/dummyData');
 const User = require('../models/user.model');
 const customError = require('../utils/customError');
 const jwt = require('jsonwebtoken');
@@ -9,7 +9,7 @@ const {ACCESS_TOKEN_SECRET, REFREHS_TOKEN_SECRET} = process.env;
 
 const userServices = {
     fetchUsers () {
-        const validUsers = userData.map(user => {
+        const validUsers = users.map(user => {
             const newUser = new User();
             newUser.id = user.id;
             newUser.firstname = user.firstname;
@@ -26,22 +26,22 @@ const userServices = {
     },
 
     signUp (user) {
-        const userLength = userData.length;
-        const lastId = userData[userLength - 1].id;
+        const userLength = users.length;
+        const lastId = users[userLength - 1].id;
         const newId = lastId + 1;
         user.id = newId;
-        userData.push(user);
-        const accessToken = jwt.sign(user.email, ACCESS_TOKEN_SECRET);
-        return {user, accessToken};
+        users.push(user);
+        // const accessToken = jwt.sign(user.email, ACCESS_TOKEN_SECRET);
+        return user;
     },
 
     login (email) {
-        const foundUser = userData.find(user => user.email === email);
+        const foundUser = users.find(user => user.email === email);
         if (!foundUser) {
             return new customError(401, 'user not found!');
         }
-        const accessToken = jwt.sign(foundUser.email, ACCESS_TOKEN_SECRET);
-        return {foundUser, accessToken} || {};
+        // const accessToken = jwt.sign(foundUser.email, ACCESS_TOKEN_SECRET);
+        return foundUser || {};
     }
 }
 
