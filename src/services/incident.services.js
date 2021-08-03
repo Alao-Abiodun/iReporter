@@ -11,6 +11,15 @@ const incidentServices = {
         const allFlags = incidents.map(incident => incident)
         return allFlags;
     },
+
+        // // @describe fetch a specific red-flag
+    // // @public api/v1/
+    
+    retrieveSingleRedFlag(id) {
+        const foundFlag = incidents.find(incident => incident.id === parseInt(id));
+        return foundFlag || {};
+    },
+
 }
 
 module.exports = incidentServices;

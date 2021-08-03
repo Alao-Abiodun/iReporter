@@ -9,6 +9,15 @@ const incidentController = {
             const data = incidentServices.fetchRedFlags();
             return responseHandler(res, 200, 'red-flags retrieved successfully...', data); 
     },
+    
+    fetchSingleFlags (req, res, next) {
+        const {id} = req.params;
+        if (!id) {
+            return next(new customError(404, 'Id is not found!'));
+        }
+        const data = incidentServices.retrieveSingleRedFlag(id);
+        return responseHandler(res, 200, 'single flag fetched successfully...', data);
+    },
 }
 
 module.exports = incidentController;

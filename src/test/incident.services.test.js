@@ -21,4 +21,19 @@ describe('Incidents', () => {
             done();
         })
     })
+
+    describe('fetch single red-flags', () => {
+        it('should retrieve only a single red-flags', done => {
+            const id = incidents[incidents.length - 1].id;
+            const foundFlag = incidents.find(incident => incident.id === parseInt(id));
+            chai.request(app)
+                .get('/api/v1/red-flags/' + id)
+                .send(foundFlag)
+                .end((err, res) => {
+                    if (err) console.log(err);
+                    res.should.have.status(200);
+                })
+                done();
+        })
+    })
 })
