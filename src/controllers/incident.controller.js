@@ -18,6 +18,15 @@ const incidentController = {
         const data = incidentServices.retrieveSingleRedFlag(id);
         return responseHandler(res, 200, 'single flag fetched successfully...', data);
     },
+
+    createARedFlag (req, res, next) {  
+            const newflag = req.body;
+            if (!newflag) {
+                return next(new customError(404, 'please fill in the required field...'))
+            }
+            const data = incidentServices.addRegFlag(newflag);
+            return responseHandler(res, 201, 'A new red-flag is created successfully...', data);
+    }
 }
 
 module.exports = incidentController;
