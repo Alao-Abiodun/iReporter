@@ -9,4 +9,6 @@ router.get('/red-flags', incidentCtrl.fetchAllRedFlags);
 router.get('/red-flags/:id',incidentCtrl.fetchSingleFlags);
 router.post('/red-flags', incidentCtrl.createARedFlag);
 
+router.put('/red-flags/:id/location', incidentCtrl.updateFlagLocation);
+
 module.exports = router;

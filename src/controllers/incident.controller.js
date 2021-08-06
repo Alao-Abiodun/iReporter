@@ -26,6 +26,13 @@ const incidentController = {
             }
             const data = incidentServices.addRegFlag(newflag);
             return responseHandler(res, 201, 'A new red-flag is created successfully...', data);
+    },
+
+    updateFlagLocation (req, res, next) {
+        const { id } = req.params;
+        const {location} = req.body;
+        const data = incidentServices.updateRedFlagLocation(id, location);
+        return responseHandler(res, 200, 'Update successfully', data);
     }
 }
 

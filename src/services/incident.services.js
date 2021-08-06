@@ -30,6 +30,14 @@ const incidentServices = {
         incident.id = newIncidentId;
         incidents.push(incident);
         return incident;
+    },
+
+    // @describe update a red-flag 
+    // @public api/v1/red-flag/:id
+    updateRedFlagLocation (id, location) {
+        const redFlag = incidents.find(incident => incident.id === +id);
+        redFlag.location = location
+        return redFlag || {};
     }
 
 }
