@@ -31,6 +31,9 @@ const incidentController = {
     updateFlagLocation (req, res, next) {
         const { id } = req.params;
         const {location} = req.body;
+        if (!id) {
+            return next(new customError(404, 'Id is not found!'));
+        }
         const data = incidentServices.updateRedFlagLocation(id, location);
         return responseHandler(res, 200, 'Update successfully', data);
     }
