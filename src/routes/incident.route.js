@@ -1,4 +1,4 @@
-const {Router} = require('express');
+const { Router } = require('express');
 const router = Router();
 
 const incidentCtrl = require('../controllers/incident.controller');
@@ -6,9 +6,16 @@ const incidentCtrl = require('../controllers/incident.controller');
 // GET  all red-flags, interventions records
 router.get('/red-flags', incidentCtrl.fetchAllRedFlags);
 
-router.get('/red-flags/:id',incidentCtrl.fetchSingleFlags);
+// GET  specific red-flags, intervention records
+router.get('/red-flags/:id', incidentCtrl.fetchSingleFlags);
+
+// POST create a red-flag record 
 router.post('/red-flags', incidentCtrl.createARedFlag);
 
+// UPDATE red-flag location
 router.put('/red-flags/:id/location', incidentCtrl.updateFlagLocation);
+
+// UPDATE red-flag location
+router.put('/red-flags/:id/comment', incidentCtrl.updateFlagComment);
 
 module.exports = router;
