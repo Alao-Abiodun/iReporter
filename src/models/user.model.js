@@ -1,5 +1,5 @@
 class User {
-    constructor () {
+    constructor() {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -8,7 +8,7 @@ class User {
         this.phoneNumber = phoneNumber;
         this.username = username;
         this.registered = registered;
-        this.isAdmin = isAdmin; 
+        this.isAdmin = isAdmin;
     }
 }
 

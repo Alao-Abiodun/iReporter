@@ -2,7 +2,7 @@ const app = require('../app');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 
-const {incidents} = require('../utils/dummyData');
+const { incidents } = require('../utils/dummyData');
 
 let should = chai.should();
 
@@ -33,7 +33,7 @@ describe('Incidents', () => {
                     if (err) console.log(err);
                     res.should.have.status(200);
                 })
-                done();
+            done();
         })
     })
 
@@ -64,22 +64,22 @@ describe('Incidents', () => {
     })
 
     describe('UPDATE user should be able to change record', () => {
-        it ('should update red-flag location', done => {
+        it('should update red-flag location', done => {
             const id = incidents[incidents.length - 1].id;
             const updatedFlag = incidents.find(incident => incident.id === parseInt(id));
-                chai.request(app)
-                    .get('/api/v1/red-flags')
-                    .end((err, res) => {
-                        if (err) console.log(err);
-                        chai.request(app)
-                            .put('/api/v1/red-flags/' + id + '/location')
-                    .send(updatedFlag)
-                    .end((err, res) => {
-                        if (err) console.log(err);
-                        res.should.have.status(200);
-                        done();
-                    });
-                    });
+            chai.request(app)
+                .get('/api/v1/red-flags')
+                .end((err, res) => {
+                    if (err) console.log(err);
+                    chai.request(app)
+                        .put('/api/v1/red-flags/' + id + '/location')
+                        .send(updatedFlag)
+                        .end((err, res) => {
+                            if (err) console.log(err);
+                            res.should.have.status(200);
+                            done();
+                        });
+                });
         })
     })
 })

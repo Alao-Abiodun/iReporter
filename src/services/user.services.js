@@ -1,14 +1,14 @@
-const {users} = require('../utils/dummyData');
+const { users } = require('../utils/dummyData');
 const User = require('../models/user.model');
 const customError = require('../utils/customError');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
-const {ACCESS_TOKEN_SECRET, REFREHS_TOKEN_SECRET} = process.env;
+const { ACCESS_TOKEN_SECRET, REFREHS_TOKEN_SECRET } = process.env;
 
 
 const userServices = {
-    fetchUsers () {
+    fetchUsers() {
         const validUsers = users.map(user => {
             const newUser = new User();
             newUser.id = user.id;
@@ -25,7 +25,7 @@ const userServices = {
         return validUsers;
     },
 
-    signUp (user) {
+    signUp(user) {
         const userLength = users.length;
         const lastId = users[userLength - 1].id;
         const newId = lastId + 1;
@@ -35,7 +35,7 @@ const userServices = {
         return user;
     },
 
-    login (email) {
+    login(email) {
         const foundUser = users.find(user => user.email === email);
         if (!foundUser) {
             return new customError(401, 'user not found!');
