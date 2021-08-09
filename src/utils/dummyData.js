@@ -44,7 +44,7 @@ const incidents = [
         location: ['2.35', '1.90'],
         status: ['rejected'],
         images: 'abiodun.jpg',
-        vidoes: 'marry.mp4',
+        videos: 'marry.mp4',
         comment: 'This is really serious, please look into the situation.'
     },
     {
@@ -55,7 +55,7 @@ const incidents = [
         location: ['2.35', '1.90'],
         status: ['resolved'],
         images: 'road.jpg',
-        vidoes: 'mining.mp4',
+        videos: 'mining.mp4',
         comment: 'This road is bad and cause accident when travelling at night.'
     },
     {
@@ -66,7 +66,7 @@ const incidents = [
         location: ['2.35', '1.90'],
         status: ['resolved'],
         images: ['killing.jpg'],
-        vidoes: ['deathkillings.mp4'],
+        videos: ['deathkillings.mp4'],
         comment: 'This totally outrageous and such act should be taken away and penalized.'
     }
 ]

@@ -30,6 +30,17 @@ const incidentServices = {
         incident.id = newIncidentId;
         incidents.push(incident);
         return incident;
+    },
+
+    // @describe update a red-flag 
+    // @public api/v1/red-flag/:id
+    updateRedFlagLocation (id, location) {
+        const redFlag = incidents.find(incident => incident.id === +id);
+        if (!redFlag) {
+            return new customError(401, 'The record does not exist');
+        }
+        redFlag.location = location
+        return redFlag || {};
     }
 
 }
