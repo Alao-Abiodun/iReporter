@@ -19,6 +19,6 @@ router.put('/red-flags/:id/location', incidentCtrl.updateFlagLocation);
 router.put('/red-flags/:id/comment', incidentCtrl.updateFlagComment);
 
 // DELETE a red-flag record
-router.delete('/red-flags/:id', incidentCtrl.FilterRedFlag);
+router.delete('/red-flags/:id', incidentCtrl.filterRedFlag);
 
 module.exports = router;

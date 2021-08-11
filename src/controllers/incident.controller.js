@@ -48,7 +48,7 @@ const incidentController = {
         return responseHandler(res, 200, 'comment updated successfully', data);
     },
 
-    FilterRedFlag(req, res, next) {
+    filterRedFlag(req, res, next) {
         const { id } = req.params;
         if (!id) {
             return next(new customError(404, 'Record Not Found!'));
