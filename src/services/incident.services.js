@@ -52,8 +52,19 @@ const incidentServices = {
         }
         redFlagComment.comment = comment;
         return redFlagComment || {};
-    }
+    },
 
+    // @describe delete a red-flag record
+    // @public api/v1/red-flags/:id
+    removeARedFlag(id) {
+        const flagId = incidents.find(incident => incident.id === +id);
+        if (!flagId) {
+            return new customError(401, 'This Record does not exist');
+        }
+        const index = incidents.indexOf(flagId);
+        const removeItem = incidents.splice(index, 1);
+        console.log(removeItem);
+    }
 }
 
 module.exports = incidentServices;

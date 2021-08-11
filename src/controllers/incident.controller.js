@@ -46,6 +46,15 @@ const incidentController = {
         }
         const data = incidentServices.updateRedFlagComment(id, comment);
         return responseHandler(res, 200, 'comment updated successfully', data);
+    },
+
+    filterRedFlag(req, res, next) {
+        const { id } = req.params;
+        if (!id) {
+            return next(new customError(404, 'Record Not Found!'));
+        }
+        const data = incidentServices.removeARedFlag(id);
+        return responseHandler(res, 200, 'Record deleted successfully', data);
     }
 }
 

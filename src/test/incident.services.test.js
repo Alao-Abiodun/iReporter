@@ -96,7 +96,28 @@ describe('Incidents', () => {
                             .end((err, res) => {
                                 if (err) console.log(err);
                                 res.should.have.status(200);
-                                done()
+                                done();
+                            })
+                    })
+            })
+        })
+
+        describe('DELETE /api/v1/red-flags/:id', () => {
+            it('should remove a red-flag record', done => {
+                const id = incidents[incidents.length - 1].id;
+                const flag = incidents.find(incident => incident.id === parseInt(id));
+                const removeRedFlag = incidents.splice(flag, 1);
+                chai.request(app)
+                    .get('/api/v1/red-flags')
+                    .end((err, res) => {
+                        if (err) console.log(err);
+                        chai.request(app)
+                            .delete('/api/v1/red-flags/' + id)
+                            .send(removeRedFlag)
+                            .end((err, res) => {
+                                if (err) console.log(err);
+                                res.should.have.status(200);
+                                done();
                             })
                     })
             })
