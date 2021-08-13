@@ -20,7 +20,7 @@ const userController = {
     },
 
     async findExistingUser (req, res) {
-            const {email} = req.body;
+        const {email} = req.body;
         if (!email) {
             return new customError(401, 'User does not exist');
         }
