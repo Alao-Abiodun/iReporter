@@ -6,22 +6,11 @@ require('dotenv').config();
 
 const {ACCESS_TOKEN_SECRET, REFREHS_TOKEN_SECRET} = process.env;
 
+// console.log(users);
 
 const userServices = {
-    fetchUsers () {
-        const validUsers = users.map(user => {
-            const newUser = new User();
-            newUser.id = user.id;
-            newUser.firstname = user.firstname;
-            newUser.lastname = user.lastname;
-            newUser.othernames = user.othernames;
-            newUser.email = user.email;
-            newUser.phoneNumber = user.phoneNumber;
-            newUser.username = user.username;
-            newUser.registered = user.registered;
-            newUser.isAdmin = user.isAdmin;
-            return newUser;
-        })
+    fetchUsers (req, res) {
+        const validUsers = users.map(user => user)
         return validUsers;
     },
 
@@ -31,17 +20,16 @@ const userServices = {
         const newId = lastId + 1;
         user.id = newId;
         users.push(user);
-        // const accessToken = jwt.sign(user.email, ACCESS_TOKEN_SECRET);
         return user;
     },
 
     login (email) {
-        const foundUser = users.find(user => user.email === email);
+        const foundUser = users.find(user => user.email == email);
         if (!foundUser) {
             return new customError(401, 'user not found!');
         }
-        // const accessToken = jwt.sign(foundUser.email, ACCESS_TOKEN_SECRET);
-        return foundUser || {};
+        const accessToken = jwt.sign(foundUser.email, ACCESS_TOKEN_SECRET);
+        return {foundUser, token: accessToken} || {};
     }
 }
 

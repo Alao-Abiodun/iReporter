@@ -44,22 +44,24 @@ describe('User', () => {
                 })
                 done();
         })
+    })
 
-        describe('Existing Users can login successfully', () => {
-            it ('user should be able to login successfully if its existed', done => {
-                let user = {email: 'fawaz@gmail.com'}
-                const accessToken = jwt.sign(user.email, ACCESS_TOKEN_SECRET);
-                chai.request(app)
-                    .post('/api/v1/user/login')
-                    .send(user)
-                    .end((err, res) => {
-                        if (err) {
-                            console.log(err);
-                        }
-                        res.should.have.status(200);                        
-                    })
-                    done();
-            })
+    
+    describe('Existing Users can login successfully', () => {
+        it ('user should be able to login successfully if its existed', done => {
+            const email = 'abiodundev@gmail.com'
+            const foundUser = users.find(user => user.email == email);
+            const accessToken = jwt.sign(email, ACCESS_TOKEN_SECRET);
+            chai.request(app)
+                .post('/api/v1/user/login')
+                .send({foundUser, token: accessToken})
+                .end((err, res) => {
+                    if (err) {
+                        console.log(err);
+                    }
+                    res.should.have.status(200);                        
+                })
+                done();
         })
     })
 })
