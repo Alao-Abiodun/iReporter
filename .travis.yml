@@ -7,7 +7,7 @@ branches:
     - main
 
 script:
-  - npm run test:ci
+  - npm run test
 
 env:
   global:
