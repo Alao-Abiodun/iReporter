@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "nodemon --exec mocha \"./{,!(node_modules)/**/}*.test.js\"",
+    "test": "mocha ./src/test --exit",
     "dev": "nodemon ./src/app.js",
     "start": "node ./src/app.js"
   },
