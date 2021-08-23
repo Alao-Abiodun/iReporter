@@ -9,9 +9,17 @@ branches:
 # script:
 #   - npm run test
 
+before_install:
+  - npm install -g codecov
+
+script:
+  - istancbul cover ./node_modules/bin/_mocha --reporter lcovonly -- -R spec
+  - codecov
+
 env:
   global:
     - ACCESS_TOKEN_SECRET=ireporter-access-token-secret
+    - CODECOV_TOKEN='bd7b11a3-9039-4e03-9c37-d3c481397a9f'
 
 # after_success:
 #   - npm run coveralls
