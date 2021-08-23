@@ -13,6 +13,10 @@ env:
   global:
     - ACCESS_TOKEN_SECRET=ireporter-access-token-secret
 
+after_success:
+  - npm run coveralls
+  - npm run test
+
 deploy:
   provider: heroku
   api_key: 5e4a10e2-0e59-4cf7-9e12-a9e32609990f
