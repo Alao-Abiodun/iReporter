@@ -6,8 +6,9 @@ branches:
   only:
     - main
 
-# script:
-#   - npm run test
+script:
+  - npm run test
+  - npm run coveralls
 
 env:
   global:
