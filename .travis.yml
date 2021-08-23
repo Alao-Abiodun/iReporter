@@ -6,17 +6,16 @@ branches:
   only:
     - main
 
-script:
-  - npm run test
-  - npm run coveralls
+# script:
+#   - npm run test
 
 env:
   global:
     - ACCESS_TOKEN_SECRET=ireporter-access-token-secret
 
-after_success:
-  - npm run coveralls
-  - npm run test
+# after_success:
+#   - npm run coveralls
+#   - npm run test
 
 deploy:
   provider: heroku
