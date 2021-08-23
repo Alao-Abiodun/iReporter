@@ -9,12 +9,12 @@ branches:
 # script:
 #   - npm run test
 
-before_install:
-  - npm install -g codecov
+# before_install:
+#   - npm install -g codecov
 
-script:
-  - istanbul cover ./node_modules/bin/_mocha --reporter lcovonly -- -R spec
-  - codecov
+# script:
+#   - istanbul cover ./node_modules/bin/_mocha --reporter lcovonly -- -R spec
+#   - codecov
 
 env:
   global:
