@@ -15,7 +15,7 @@ chai.use(chaiHttp);
 
 describe("User", () => {
   describe("create a new User", () => {
-    it("should add user into the Arrays of object", async (done) => {
+    it("should add user into the Arrays of object", (done) => {
       // let userLength = users.length;
       // let lastUserId = users[userLength - 1].id;
       // newId = lastUserId + 1;
@@ -29,7 +29,7 @@ describe("User", () => {
         registered: true,
         isAdmin: false,
       };
-      const newUser = await db.execute(
+      const newUser = db.execute(
         "INSERT INTO users (firstName, lastName, othernames, email, phonenumber, username, registered, isAdmin) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
         [
           user.firstname,
@@ -64,7 +64,7 @@ describe("User", () => {
   describe("Existing Users can login successfully", () => {
     it("user should be able to login successfully if its existed", (done) => {
       const email = "abiodundev@gmail.com";
-      const users = await db.execute("SELECT * FROM users");
+      const users = db.execute("SELECT * FROM users");
       const foundUser = users[0].find((user) => user.email == email);
       const accessToken = jwt.sign(email, ACCESS_TOKEN_SECRET);
 
