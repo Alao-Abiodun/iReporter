@@ -2,6 +2,9 @@ language: node_js
 node_js:
   - "14"
 
+services:
+  - mysql
+
 branches:
   only:
     - main
@@ -9,8 +12,8 @@ branches:
 # script:
 #   - npm run test
 
-# before_install:
-#   - npm install -g codecov
+before_install:
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS test'
 
 # script:
 #   - istanbul cover ./node_modules/bin/_mocha --reporter lcovonly -- -R spec
