@@ -10,4 +10,4 @@ let connection = mysql.createConnection({
   database: "ireporterdb",
 });
 
-module.exports = connection;
+module.exports = connection.promise();
