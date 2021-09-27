@@ -41,6 +41,9 @@ const userServices = {
           userDetails.isAdmin,
         ]
       );
+      if (userDetails.email === email) {
+        throw new Error("This email already exist");
+      }
       return newUser;
     } catch (error) {
       console.log(error);
