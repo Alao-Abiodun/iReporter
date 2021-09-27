@@ -47,7 +47,6 @@ describe("Incidents", () => {
     //   let newId = id + 1;
     it("should create a reg-flag or intervention", (done) => {
       let incident = {
-        id: newId,
         createdOn: "2021-08-02",
         createdBy: "salaudeen",
         type: ["red-flag"],
