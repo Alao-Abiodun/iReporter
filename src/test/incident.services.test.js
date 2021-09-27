@@ -60,15 +60,15 @@ describe("Incidents", () => {
       const newRecord = db.execute(
         "INSERT INTO incidents (createdBy, createdOn, type, location, status, images, videos, comment, userId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
         [
-          incidentDetails.createdBy,
-          incidentDetails.createdOn,
-          incidentDetails.type,
-          incidentDetails.location,
-          incidentDetails.status,
-          incidentDetails.images,
-          incidentDetails.videos,
-          incidentDetails.comment,
-          incidentDetails.userId,
+          incident.createdBy,
+          incident.createdOn,
+          incident.type,
+          incident.location,
+          incident.status,
+          incident.images,
+          incident.videos,
+          incident.comment,
+          incident.userId,
         ]
       );
       chai
