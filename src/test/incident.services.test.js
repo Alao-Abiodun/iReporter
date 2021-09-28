@@ -1,6 +1,7 @@
 const app = require("../app");
 const chai = require("chai");
 const chaiHttp = require("chai-http");
+const db = require("../databases/db");
 
 const { incidents } = require("../utils/dummyData");
 
