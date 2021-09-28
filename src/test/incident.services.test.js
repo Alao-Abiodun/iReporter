@@ -41,32 +41,44 @@ describe("Incidents", () => {
     });
   });
 
-  //   describe("POST red-flag or intervention record", () => {
-  //     const id = incidents[incidents.length - 1].id;
-  //     let newId = id + 1;
-  //     it("should create a reg-flag or intervention", (done) => {
-  //       let newRecord = {
-  //         id: newId,
-  //         createdOn: "2021-08-02",
-  //         createdBy: "salaudeen",
-  //         type: ["red-flag"],
-  //         location: ["2.35", "1.90"],
-  //         status: ["rejected"],
-  //         images: "road.jpg",
-  //         vidoes: "dirty.mp4",
-  //         comment: "This road is littered with dirt, and can cause flood",
-  //       };
-  //       chai
-  //         .request(app)
-  //         .post("/api/v1/red-flags")
-  //         .send(newRecord)
-  //         .end((err, res) => {
-  //           if (err) console.log(err);
-  //           res.should.have.status(201);
-  //         });
-  //       done();
-  //     });
-  //   });
+  describe("POST red-flag or intervention record", () => {
+    it("should create a reg-flag or intervention", (done) => {
+      let record = {
+        id: newId,
+        createdOn: "2021-08-02",
+        createdBy: "salaudeen",
+        type: ["red-flag"],
+        location: ["2.35", "1.90"],
+        status: ["rejected"],
+        images: "road.jpg",
+        vidoes: "dirty.mp4",
+        comment: "This road is littered with dirt, and can cause flood",
+      };
+      const newRecord = db.execute(
+        "INSERT INTO incidents (createdBy, createdOn, type, location, status, images, videos, comment, userId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        [
+          record.createdBy,
+          record.createdOn,
+          record.type,
+          record.location,
+          record.status,
+          record.images,
+          record.videos,
+          record.comment,
+          record.userId,
+        ]
+      );
+      chai
+        .request(app)
+        .post("/api/v1/red-flags")
+        .send(newRecord)
+        .end((err, res) => {
+          if (err) console.log(err);
+          res.should.have.status(201);
+        });
+      done();
+    });
+  });
 
   describe("UPDATE user should be able to change location record", () => {
     it("should update red-flag location", (done) => {
