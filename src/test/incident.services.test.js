@@ -44,7 +44,6 @@ describe("Incidents", () => {
   describe("POST red-flag or intervention record", () => {
     it("should create a reg-flag or intervention", (done) => {
       let record = {
-        id: newId,
         createdOn: "2021-08-02",
         createdBy: "salaudeen",
         type: ["red-flag"],
