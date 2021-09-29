@@ -8,32 +8,24 @@ const incidentServices = {
   //@describe fetch all red-flags
   //@public api/v1/red-flags
 
-  fetchRedFlags() {
-    const allFlags = incidents.map((incident) => incident);
-    return allFlags;
+  async fetchRedFlags() {
+    const [result, fields] = await db.execute("SELECT * FROM incidents");
+    return result;
   },
 
   // // @describe fetch a specific red-flag
   // // @public api/v1/
 
-  retrieveSingleRedFlag(id) {
-    const foundFlag = incidents.find(
-      (incident) => incident.id === parseInt(id)
+  async retrieveSingleRedFlag(id) {
+    const [result, fields] = await db.execute(
+      "SELECT * FROM incidents WHERE id=?",
+      [id]
     );
-    return foundFlag || {};
+    return result;
   },
 
   // @describe create a red-flag
   // @public api/v1/red-flag
-
-  // addRegFlag(incident) {
-  //   const incidentLenght = incidents.length;
-  //   const lastIncidentId = incidents[incidentLenght - 1].id;
-  //   const newIncidentId = lastIncidentId + 1;
-  //   incident.id = newIncidentId;
-  //   incidents.push(incident);
-  //   return incident;
-  // },
 
   async addRedFlag(incident) {
     let incidentDetails = {

@@ -3,8 +3,9 @@ const responseHandler = require("../utils/responseHandlers");
 const customError = require("../utils/customError");
 
 const incidentController = {
-  fetchAllRedFlags(req, res, next) {
-    const data = incidentServices.fetchRedFlags();
+  async fetchAllRedFlags(req, res, next) {
+    const data = await incidentServices.fetchRedFlags();
+    console.log(data);
     return responseHandler(
       res,
       200,
@@ -13,12 +14,12 @@ const incidentController = {
     );
   },
 
-  fetchSingleFlags(req, res, next) {
+  async fetchSingleFlags(req, res, next) {
     const { id } = req.params;
     if (!id) {
       return next(new customError(404, "Id is not found!"));
     }
-    const data = incidentServices.retrieveSingleRedFlag(id);
+    const data = await incidentServices.retrieveSingleRedFlag(id);
     return responseHandler(
       res,
       200,
