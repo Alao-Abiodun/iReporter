@@ -10,37 +10,42 @@ let should = chai.should();
 chai.use(chaiHttp);
 
 describe("Incidents", () => {
-  // describe("GET fetch all red-flags", () => {
-  //   it("user should be able to fetch all red-flag", (done) => {
-  //     chai
-  //       .request(app)
-  //       .get("/api/v1/red-flags")
-  //       .send(incidents)
-  //       .end((err, res) => {
-  //         if (err) console.log(err);
-  //         res.should.have.status(200);
-  //       });
-  //     done();
-  //   });
-  // });
+  describe("GET fetch all red-flags", () => {
+    it("user should be able to fetch all red-flag", (done) => {
+      const [result, fields] = db.execute("SELECT * FROM incidents");
+      chai
+        .request(app)
+        .get("/api/v1/red-flags")
+        .send(result)
+        .end((err, res) => {
+          if (err) console.log(err);
+          res.should.have.status(200);
+        });
+      done();
+    });
+  });
 
-  // describe("GET fetch single red-flags", () => {
-  //   it("should retrieve only a single red-flags", (done) => {
-  //     const id = incidents[incidents.length - 1].id;
-  //     const foundFlag = incidents.find(
-  //       (incident) => incident.id === parseInt(id)
-  //     );
-  //     chai
-  //       .request(app)
-  //       .get("/api/v1/red-flags/" + id)
-  //       .send(foundFlag)
-  //       .end((err, res) => {
-  //         if (err) console.log(err);
-  //         res.should.have.status(200);
-  //       });
-  //     done();
-  //   });
-  // });
+  describe("GET fetch single red-flags", () => {
+    it("should retrieve only a single red-flags", (done) => {
+      // const id = incidents[incidents.length - 1].id;
+      // const foundFlag = incidents.find(
+      //   (incident) => incident.id === parseInt(id)
+      // );
+      const [result, fields] = await db.execute(
+        "SELECT * FROM incidents WHERE id=?",
+        [id]
+      );
+      chai
+        .request(app)
+        .get("/api/v1/red-flags/" + id)
+        .send(result)
+        .end((err, res) => {
+          if (err) console.log(err);
+          res.should.have.status(200);
+        });
+      done();
+    });
+  });
 
   describe("POST red-flag or intervention record", () => {
     it("should create a reg-flag or intervention", (done) => {
