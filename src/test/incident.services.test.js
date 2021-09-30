@@ -27,7 +27,7 @@ describe("Incidents", () => {
 
   describe("GET fetch single red-flags", () => {
     it("should retrieve only a single red-flags", (done) => {
-      const { id } = req.params;
+      let id = 2;
       const [result, fields] = db.execute(
         "SELECT * FROM incidents WHERE id=?",
         [id]
