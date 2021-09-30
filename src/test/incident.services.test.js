@@ -27,10 +27,7 @@ describe("Incidents", () => {
 
   describe("GET fetch single red-flags", () => {
     it("should retrieve only a single red-flags", (done) => {
-      // const id = incidents[incidents.length - 1].id;
-      // const foundFlag = incidents.find(
-      //   (incident) => incident.id === parseInt(id)
-      // );
+      const { id } = req.params;
       const [result, fields] = db.execute(
         "SELECT * FROM incidents WHERE id=?",
         [id]
