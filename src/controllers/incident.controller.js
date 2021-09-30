@@ -49,34 +49,34 @@ const incidentController = {
     }
   },
 
-  updateFlagLocation(req, res, next) {
-    const { id } = req.params;
-    const { location } = req.body;
-    if (!id) {
-      return next(new customError(404, "Id is not found!"));
-    }
-    const data = incidentServices.updateRedFlagLocation(id, location);
-    return responseHandler(res, 200, "Update successfully", data);
-  },
+  // updateFlagLocation(req, res, next) {
+  //   const { id } = req.params;
+  //   const { location } = req.body;
+  //   if (!id) {
+  //     return next(new customError(404, "Id is not found!"));
+  //   }
+  //   const data = incidentServices.updateRedFlagLocation(id, location);
+  //   return responseHandler(res, 200, "Update successfully", data);
+  // },
 
-  updateFlagComment(req, res, next) {
-    const { id } = req.params;
-    const { comment } = req.body;
-    if (!id) {
-      return next(new customError(404, "Id is not found!"));
-    }
-    const data = incidentServices.updateRedFlagComment(id, comment);
-    return responseHandler(res, 200, "comment updated successfully", data);
-  },
+  // updateFlagComment(req, res, next) {
+  //   const { id } = req.params;
+  //   const { comment } = req.body;
+  //   if (!id) {
+  //     return next(new customError(404, "Id is not found!"));
+  //   }
+  //   const data = incidentServices.updateRedFlagComment(id, comment);
+  //   return responseHandler(res, 200, "comment updated successfully", data);
+  // },
 
-  filterRedFlag(req, res, next) {
-    const { id } = req.params;
-    if (!id) {
-      return next(new customError(404, "Record Not Found!"));
-    }
-    const data = incidentServices.removeARedFlag(id);
-    return responseHandler(res, 200, "Record deleted successfully", data);
-  },
+  // filterRedFlag(req, res, next) {
+  //   const { id } = req.params;
+  //   if (!id) {
+  //     return next(new customError(404, "Record Not Found!"));
+  //   }
+  //   const data = incidentServices.removeARedFlag(id);
+  //   return responseHandler(res, 200, "Record deleted successfully", data);
+  // },
 };
 
 module.exports = incidentController;
