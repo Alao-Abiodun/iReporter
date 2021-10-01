@@ -5,7 +5,6 @@ const customError = require("../utils/customError");
 const incidentController = {
   async fetchAllRedFlags(req, res, next) {
     const data = await incidentServices.fetchRedFlags();
-    console.log(data);
     return responseHandler(
       res,
       200,
@@ -49,34 +48,35 @@ const incidentController = {
     }
   },
 
-  // updateFlagLocation(req, res, next) {
-  //   const { id } = req.params;
-  //   const { location } = req.body;
-  //   if (!id) {
-  //     return next(new customError(404, "Id is not found!"));
-  //   }
-  //   const data = incidentServices.updateRedFlagLocation(id, location);
-  //   return responseHandler(res, 200, "Update successfully", data);
-  // },
+  async updateFlagLocation(req, res, next) {
+    const { id } = req.params;
+    const { location } = req.body;
+    if (!id) {
+      return next(new customError(404, "Id is not found!"));
+    }
+    const data = await incidentServices.updateRedFlagLocation(id, location);
+    // console.log(data);
+    return responseHandler(res, 200, "Update successfully", data);
+  },
 
-  // updateFlagComment(req, res, next) {
-  //   const { id } = req.params;
-  //   const { comment } = req.body;
-  //   if (!id) {
-  //     return next(new customError(404, "Id is not found!"));
-  //   }
-  //   const data = incidentServices.updateRedFlagComment(id, comment);
-  //   return responseHandler(res, 200, "comment updated successfully", data);
-  // },
+  async updateFlagComment(req, res, next) {
+    const { id } = req.params;
+    const { comment } = req.body;
+    if (!id) {
+      return next(new customError(404, "Id is not found!"));
+    }
+    const data = await incidentServices.updateRedFlagComment(id, comment);
+    return responseHandler(res, 200, "comment updated successfully", data);
+  },
 
-  // filterRedFlag(req, res, next) {
-  //   const { id } = req.params;
-  //   if (!id) {
-  //     return next(new customError(404, "Record Not Found!"));
-  //   }
-  //   const data = incidentServices.removeARedFlag(id);
-  //   return responseHandler(res, 200, "Record deleted successfully", data);
-  // },
+  async filterRedFlag(req, res, next) {
+    const { id } = req.params;
+    if (!id) {
+      return next(new customError(404, "Record Not Found!"));
+    }
+    const data = await incidentServices.removeARedFlag(id);
+    return responseHandler(res, 200, "Record deleted successfully", data);
+  },
 };
 
 module.exports = incidentController;
