@@ -89,14 +89,10 @@ const incidentServices = {
       "DELETE FROM incidents WHERE id = ?",
       [id]
     );
-    // const flagId = incidents.find((incident) => incident.id === +id);
     if (!result) {
       return new customError(401, "This Record does not exist");
     }
     return result;
-    // const index = incidents.indexOf(flagId);
-    // const removeItem = incidents.splice(index, 1);
-    // console.log(removeItem);
   },
 };
 
