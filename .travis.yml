@@ -13,7 +13,7 @@ branches:
 #   - npm run test
 
 before_install:
-  - mysql -e 'CREATE DATABASE IF NOT EXISTS test'
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS ireporterdb'
 
 # script:
 #   - istanbul cover ./node_modules/bin/_mocha --reporter lcovonly -- -R spec
