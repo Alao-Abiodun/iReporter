@@ -9,7 +9,7 @@ const { ACCESS_TOKEN_SECRET, REFREHS_TOKEN_SECRET } = process.env;
 
 const { users } = require("../utils/dummyData");
 
-const { expect } = chai;
+const expect = chai.expect;
 
 let should = chai.should();
 
@@ -52,10 +52,8 @@ describe("User", () => {
           if (err) {
             console.log(err);
           }
-          // res.body.should.be.a('object');
-          res.body.should.have.property("status");
-          res.body.should.have.property("message");
-          expect(res.body.status).to.be(200);
+          expect(res.body.status).to.be.true;
+          res.should.have.status(201);
         });
       done();
     });
