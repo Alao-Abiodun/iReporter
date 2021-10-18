@@ -9,6 +9,8 @@ const { ACCESS_TOKEN_SECRET, REFREHS_TOKEN_SECRET } = process.env;
 
 const { users } = require("../utils/dummyData");
 
+const { expect } = chai;
+
 let should = chai.should();
 
 chai.use(chaiHttp);
@@ -53,9 +55,7 @@ describe("User", () => {
           // res.body.should.be.a('object');
           res.body.should.have.property("status");
           res.body.should.have.property("message");
-          // res.body.should.have.property('data');
-          // res.body.data.should.have.property('email');
-          // res.body.data.email.should.be.equal('fawaz@gmail.com')
+          expect(res.body.status).to.be(200);
         });
       done();
     });
