@@ -1,22 +1,53 @@
-require('dotenv').config();
-const jwt = require('jsonwebtoken');
+require("dotenv").config();
+const jwt = require("jsonwebtoken");
+const role = require("./role"); // role.USER
 
-const {ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET} = process.env;
-const customError = require('../utils/customError');
+const { ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET } = process.env;
+const customError = require("../utils/customError");
 
+function authorize(roles = []) {
+  roles = roles.length > 0 ? roles : role.USER;
 
-const authorization = async (req, res, next) => {
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1];
-    if (token === null) {
-        return next(new customError(401, 'Token is required'));
+  return async (req, res, next) => {
+    const accessToken = req.header("Authorization");
+    if (!accessToken) {
+      return next(new customError(401, "Access denied. No token provided."));
     }
-    const user = await jwt.verify(token, ACCESS_TOKEN_SECRET);
-    if (!user) {
-        return next(new customError(403, 'Token is not valid!'));
+    try {
+      const decoded = jwt.verify(accessToken, ACCESS_TOKEN_SECRET);
+
+      const user = await db.execute("SELECT * FROM users WHERE id = ?", [
+        decoded.id,
+      ]);
+
+      if (!user) {
+        return next(
+          new customError(401, "unauthorized access: User does not exist")
+        );
+      }
+
+      if (!user.registered) {
+        return next(
+          new customError(
+            401,
+            "unauthorized access: User is registered but yet to verify"
+          )
+        );
+      }
+
+      if (!roles.includes(user[0].role)) {
+        return next(
+          new customError(401, "unauthorized access: User is not authorized")
+        );
+      }
+
+      req.$user = user;
+
+      next();
+    } catch (error) {
+      return next(new customError(401, "Invalid token."));
     }
-    req.user = user;
-    next();
+  };
 }
 
-module.exports = authorization;
+module.exports = authorize;

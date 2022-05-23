@@ -15,22 +15,20 @@ let should = chai.should();
 
 chai.use(chaiHttp);
 
+let user = {
+  firstname: "fawaz",
+  lastname: "illyas",
+  othernames: "ayinla",
+  email: "fawaz@gmail.com",
+  phonenumber: "090232434542",
+  username: "fawily",
+  registered: true,
+  isAdmin: false,
+};
+
 describe("User", () => {
   describe("create a new User", () => {
     it("should add user into the Arrays of object", (done) => {
-      // let userLength = users.length;
-      // let lastUserId = users[userLength - 1].id;
-      // newId = lastUserId + 1;
-      let user = {
-        firstname: "fawaz",
-        lastname: "illyas",
-        othernames: "ayinla",
-        email: "fawaz@gmail.com",
-        phonenumber: "090232434542",
-        username: "fawily",
-        registered: true,
-        isAdmin: false,
-      };
       const newUser = db.execute(
         "INSERT INTO users (firstName, lastName, othernames, email, phonenumber, username, registered, isAdmin) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
         [
